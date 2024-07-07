@@ -23,6 +23,7 @@ import EditPracenje from './pages/Admin/EditPracenje';
 import EditUgovor from './pages/Admin/EditUgovor';
 import EditVozilo from './pages/Admin/EditVozilo';
 import EditZahtjev from './pages/Admin/EditZahtjev';
+import EditRacun from './pages/Admin/EditRacun';
 import ShowUgovor from './pages/Admin/ShowUgovor';
 import ShowVozilo from './pages/Admin/ShowVozilo';
 import ShowZahtjeva from './pages/Admin/ShowZahtjeva';
@@ -70,10 +71,11 @@ function App() {
         <Route path='/addvozilo' element={<AddVozilo />} />
         <Route path='/addkorisnik' element={<AddKorisnik />} />
         <Route path='/adminpocetna/:id' element={<AdminPocetna />} />
-        <Route path='/editpracenje' element={<EditPracenje />} />
+        <Route path='/editpracenje/:id' element={<EditPracenje />} />
         <Route path='/editugovor/:id' element={<EditUgovor />} />
         <Route path='/editvozilo/:id' element={<EditVozilo />} />
         <Route path='/editzahtjev' element={<EditZahtjev />} />
+        <Route path='/editracun/:id' element={<EditRacun />} />
         <Route path='/showugovor' element={<ShowUgovor />} />
         <Route path='/showvozilo' element={<ShowVozilo />} />
         <Route path='/showzahtjeva' element={<ShowZahtjeva />} />

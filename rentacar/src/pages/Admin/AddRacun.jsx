@@ -35,7 +35,7 @@ const AddRacun = () => {
     <>
       <HeaderAdmin />
       <Container className='mt-5 p-2'>
-        <h1>Dodaj racun</h1>
+        <h1>Dodaj novi račun</h1>
         <hr />
 
         <Form>

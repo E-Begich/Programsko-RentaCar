@@ -1,51 +1,51 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from 'react-router-dom'; // Correct import
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Button, Form } from "react-bootstrap";
 import { Link, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import HeaderAdmin from "../../components/HeaderAdmin";
 
-const EditPracenje = () => {
+const EditRacun = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Correct usage
+  const navigate = useNavigate();
 
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-  const [id_vozilo, setId_vozilo] = useState('');
-  const [id_ugovor, setId_ugovor] = useState('');
+  const [cijena, setCijena] = useState('');
+  const [porez, setPorez] = useState('');
+  const [ukupnaCijena, setUkupnaCijena] = useState('');
+  const [idUgovor, setIdUgovor] = useState('');
 
   useEffect(() => {
-    const getOnePracenje = async () => {
+    const getOneRacun = async () => {
       try {
-        const { data } = await axios.get(`/api/aplikacija/getOnePracenje/${id}`);
-        setLatitude(data.Latitude);
-        setLongitude(data.Longitude);
-        setId_vozilo(data.Id_vozilo);
-        setId_ugovor(data.Id_ugovor);
+        const { data } = await axios.get(`/api/aplikacija/getOneRacun/${id}`);
+        setCijena(data.Cijena);
+        setPorez(data.Porez);
+        setUkupnaCijena(data.Ukupna_cijena);
+        setIdUgovor(data.Id_ugovor);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    }
-    getOnePracenje();
+    };
+    getOneRacun();
   }, [id]);
 
   const updateHandler = async (e) => {
     e.preventDefault();
     const data = {
-      Latitude: latitude,
-      Longitude: longitude,
-      Id_vozilo: id_vozilo,
-      Id_ugovor: id_ugovor
+      Cijena: cijena,
+      Porez: porez,
+      Ukupna_cijena: ukupnaCijena,
+      Id_ugovor: idUgovor
     };
 
     try {
-      await axios.put(`/api/aplikacija/updatePracenje/${id}`, data);
-      toast.success('Pracenje je uspješno izmijenjeno!');
+      await axios.put(`/api/aplikacija/updateRacun/${id}`, data);
+      toast.success('Račun je uspješno izmijenjen!');
       navigate(`/adminPocetna/${id}`);
     } catch (error) {
       console.error('Error updating data:', error);
-      toast.error('Dogodila se greška pri izmjeni pracenja.');
+      toast.error('Dogodila se greška pri izmjeni računa.');
     }
   };
 
@@ -56,7 +56,7 @@ const EditPracenje = () => {
         <div className="row">
           <div className="col"></div>
           <div className="col">
-            <h1>Izmijeni praćenje</h1>
+            <h1>Izmijeni račun</h1>
           </div>
           <div className="col"></div>
         </div>
@@ -73,25 +73,44 @@ const EditPracenje = () => {
               <NavLink className="nav-link">
                 <Link to={`/addUgovor/`} className="btn btn-outline-dark btn-lg">Kreiraj ugovor</Link>
               </NavLink>
+              <Link to={`/addRacun`} className="btn btn-outline-dark btn-lg btn-block">Dodaj novi račun</Link>
             </nav>
           </div>
           <div className="col-8">
             <Container className='mt-2 p-3'>
               <Form onSubmit={updateHandler}>
-                <Form.Group className="mb-3" controlId="latitude">
-                  <Form.Label>Latitude</Form.Label>
+                <Form.Group className="mb-3" controlId="cijena">
+                  <Form.Label>Cijena</Form.Label>
                   <Form.Control
-                    value={latitude}
-                    onChange={(e) => setLatitude(e.target.value)}
-                    type="text"
+                    value={cijena}
+                    onChange={(e) => setCijena(e.target.value)}
+                    type="number"
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="longitude">
-                  <Form.Label>Longitude</Form.Label>
+                <Form.Group className="mb-3" controlId="porez">
+                  <Form.Label>Porez</Form.Label>
                   <Form.Control
-                    value={longitude}
-                    onChange={(e) => setLongitude(e.target.value)}
+                    value={porez}
+                    onChange={(e) => setPorez(e.target.value)}
+                    type="number"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="ukupnaCijena">
+                  <Form.Label>Ukupna cijena</Form.Label>
+                  <Form.Control
+                    value={ukupnaCijena}
+                    onChange={(e) => setUkupnaCijena(e.target.value)}
+                    type="number"
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="idUgovor">
+                  <Form.Label>ID Ugovor</Form.Label>
+                  <Form.Control
+                    value={idUgovor}
+                    onChange={(e) => setIdUgovor(e.target.value)}
                     type="text"
                   />
                 </Form.Group>
@@ -99,6 +118,7 @@ const EditPracenje = () => {
                 <Button variant="outline-dark" type="submit">
                   Spremi podatke
                 </Button>
+                
                 <Link to={`/adminpocetna/${id}`} className="btn btn-outline-dark ms-2">Vrati se na početnu</Link>
               </Form>
             </Container>
@@ -107,6 +127,6 @@ const EditPracenje = () => {
       </div>
     </>
   );
-}
+};
 
-export default EditPracenje;
+export default EditRacun;

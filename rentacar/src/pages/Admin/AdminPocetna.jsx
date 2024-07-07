@@ -6,11 +6,8 @@ import { Link, NavLink } from 'react-router-dom';
 import HeaderAdmin from "../../components/HeaderAdmin";
 import "./../../App.css";
 
-
-
 const AdminPocetna = () => {
     const { id } = useParams()
-
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -25,9 +22,6 @@ const AdminPocetna = () => {
     useEffect(() => {
         const getVoziloData = async () => {
             const { data } = await axios.get('/api/aplikacija/getAllVozilo')
-            //za testiranje, da li se ispisuju ispravo podaci iz baze
-            console.log(data)
-            //spremanje ispisa vozila iz baze pomoću setVozilo
             setVozila(data)
         }
         getVoziloData();
@@ -54,29 +48,24 @@ const AdminPocetna = () => {
                             <NavLink className="nav-link">
                                 <Link to={`/showzahtjeva`} className="btn btn-outline-dark btn-lg">Pregled zahtjeva</Link>
                             </NavLink>
-                            <br/>
-                            <br/>
+                            <NavLink className="nav-link">
+                                <Link to={`/showVozilo/`} className="btn btn-outline-dark btn-lg">Pregled vozila</Link>
+                            </NavLink>
                             <NavLink className="nav-link">
                                 <Link to={`/addkorisnik`} className="btn btn-outline-dark btn-lg">Dodaj novog klijenta</Link>
                             </NavLink>
-                            <br/>
-                            <br/>
                             <NavLink className="nav-link">
                                 <Link to={`/addugovor`} className="btn btn-outline-dark btn-lg">Izradi novi ugovor</Link>
                             </NavLink>
                             <NavLink className="nav-link">
                                 <Link to={`/showugovor`} className="btn btn-outline-dark btn-lg">Pregledaj sve ugovore</Link>
                             </NavLink>
-                            <br/>
-                            <br/>
                             <NavLink className="nav-link">
                                 <Link to={`/addpracenje`} className="btn btn-outline-dark btn-lg">Dodaj praćenje automobila</Link>
                             </NavLink>
                             <NavLink className="nav-link">
                                 <Link to={`/showpracenje`} className="btn btn-outline-dark btn-lg">Praćenje automobila</Link>
                             </NavLink>
-                            <br/>
-                            <br/>
                             <NavLink className="nav-link">
                                 <Link to={`/addracun`} className="btn btn-outline-dark btn-lg">Izradi račun</Link>
                             </NavLink>
@@ -86,39 +75,34 @@ const AdminPocetna = () => {
                         </nav>
                     </div>
                     <div className="col-8">
-                                    {vozila.length > 0 ? (
-                                        vozila.map(Vozilo => {
-                                            return <Col  key={Vozilo.id}>
-                                                <div class="container mt-5">
-                                                    <div class="card custom-card">
-                                                        <div class="custom-card-text">
-                                                            <CardText><img src={Vozilo.Fotografija} alt="" /></CardText>
-                                                            <Card.Text><b>Marka:</b> {Vozilo.Marka} || Model: {Vozilo.Model}</Card.Text>
-                                                        </div>
-                                                        <div class="card-buttons">
-                                                            <NavLink className="nav-link">
-                                                                <Link to={`/editvozilo/${id}`} className="btn btn-outline-dark btn-lg">Uredi vozilo</Link>
-                                                            </NavLink>
-                                                            <br />
-                                                            <NavLink className="nav-link">
-                                                                <Link to={`/`} className="btn btn-outline-dark btn-lg">Obriši vozilo</Link>
-                                                            </NavLink>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </Col>
-                                        })
-
-                                    ) : (
-                                        <p> Nema unesenih vozila!</p>)}
-
-                                </div>
-                            </div>
+                        <div className="row row-cols-1 row-cols-md-3 g-4">
+                            {vozila.length > 0 ? (
+                                vozila.map(Vozilo => (
+                                    <div className="col" key={Vozilo.id}>
+                                        <div className="card h-100">
+                                            <img src={Vozilo.Fotografija} className="card-img-top" alt={Vozilo.Marka} />
+                                            <div className="card-body">
+                                                <h5 className="card-title">{Vozilo.Marka}</h5>
+                                                <p className="card-text">Model: {Vozilo.Model}</p>
+                                                <NavLink className="nav-link">
+                                                    <Link to={`/editvozilo/${Vozilo.id}`} className="btn btn-outline-dark btn-lg">Uredi vozilo</Link>
+                                                </NavLink>
+                                                <NavLink className="nav-link">
+                                                    <Link to={`/deletevozilo/${Vozilo.id}`} className="btn btn-outline-dark btn-lg">Obriši vozilo</Link>
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p> Nema unesenih vozila!</p>
+                            )}
                         </div>
                     </div>
-
-
+                </div>
+            </div>
+        </div>
     )
 }
 
-export default AdminPocetna
+export default AdminPocetna;
