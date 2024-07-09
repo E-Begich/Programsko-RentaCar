@@ -93,8 +93,7 @@ const ShowZahtjeva = () => {
                           <Card.Text><b>Datum_pocetka:</b> {formatDate(Zahtjev.Datum_pocetka)}</Card.Text>
                           <Card.Text><b>Datum_zavrsetka:</b> {formatDate(Zahtjev.Datum_zavrsetka)}</Card.Text>
                           <Card.Text><b>Napomena:</b> {Zahtjev.Napomena}</Card.Text>
-                          <Card.Text><b>Id_klijenta:</b> {Zahtjev.Id_klijenta}</Card.Text>
-                          <Card.Text><b>Id_vozilo:</b> {Zahtjev.Id_vozilo}</Card.Text>
+                        
                         </Card.Body>
                         <Card.Footer className="card-buttons">
                           <NavLink className="nav-link">

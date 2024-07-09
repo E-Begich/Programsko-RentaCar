@@ -76,7 +76,7 @@ function App() {
         <Route path='/editpracenje/:id' element={<EditPracenje />} />
         <Route path='/editugovor/:id' element={<EditUgovor />} />
         <Route path='/editvozilo/:id' element={<EditVozilo />} />
-        <Route path='/editzahtjev' element={<EditZahtjev />} />
+        <Route path='/editzahtjev/:id' element={<EditZahtjev />} />
         <Route path='/editracun/:id' element={<EditRacun />} />
         <Route path='/editkorisnik/:id' element={<EditKorisnik />} />
         <Route path='/showugovor' element={<ShowUgovor />} />

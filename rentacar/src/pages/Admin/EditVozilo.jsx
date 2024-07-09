@@ -89,6 +89,7 @@ const EditVozilo = () => {
               <NavLink className="nav-link">
               <Link to={`/AddPracenje/`} className="btn btn-outline-dark btn-lg">Pregled praćenja automobila</Link>
               </NavLink>
+              <Link to={`/adminpocetna/${id}`} className="btn btn-outline-dark btn-lg ms-2">Vrati se na početnu</Link>
               <br />
               <br />
         
@@ -182,15 +183,9 @@ const EditVozilo = () => {
 
                 <Button variant="btn btn-outline-dark btn-lg" type="submit">
                   Spremi podatke
+                  
                 </Button>
-
-                <Button variant="btn btn-outline-dark btn-lg" type="submit">
-                  Uredi podatke
-                </Button>
-
-                <Button variant="btn btn-outline-dark btn-lg" type="submit">
-                  Izbriši podatke
-                </Button>
+                
 
               </Form>
             </Container>

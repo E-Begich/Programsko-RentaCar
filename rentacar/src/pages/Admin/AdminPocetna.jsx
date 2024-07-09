@@ -88,12 +88,8 @@ const AdminPocetna = () => {
                                             <div className="card-body">
                                                 <h5 className="card-title">{Vozilo.Marka}</h5>
                                                 <p className="card-text">Model: {Vozilo.Model}</p>
-                                                <NavLink className="nav-link">
-                                                    <Link to={`/editvozilo/${Vozilo.id}`} className="btn btn-outline-dark btn-lg">Uredi vozilo</Link>
-                                                </NavLink>
-                                                <NavLink className="nav-link">
-                                                    <Link to={`/deletevozilo/${Vozilo.id}`} className="btn btn-outline-dark btn-lg">Obriši vozilo</Link>
-                                                </NavLink>
+                                                
+                                                
                                             </div>
                                         </div>
                                     </div>

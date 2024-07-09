@@ -19,30 +19,55 @@ const EditUgovor = () => {
   const [id_korisnik, setId_korisnik] = useState('');
   const [id_zaposlenik, setId_zaposlenik] = useState('');
 
+  const [vozila, setVozila] = useState([]);
+  const [korisnici, setKorisnici] = useState([]);
 
   useEffect(() => {
     const getOneUgovor = async () => {
-      const { data } = await axios.get(`/api/aplikacija/getOneUgovor/${id}`)
-      console.log(data)
+      const { data } = await axios.get(`/api/aplikacija/getOneUgovor/${id}`);
+      console.log(data);
 
-      setDatum_pocetka(data.Datum_pocetka)
-      setDatum_zavrsetka(data.Datum_zavrsetka)
-      setStatus(data.Status)
-      setOsiguranje(data.Osiguranje)
-      setNapomena(data.Napomena)
-      setId_vozilo(data.Id_vozilo)
-      setId_korisnik(data.Id_korisnik)
-      setId_zaposlenik(data.Id_zaposlenik)
+      setDatum_pocetka(data.Datum_pocetka);
+      setDatum_zavrsetka(data.Datum_zavrsetka);
+      setStatus(data.Status);
+      setOsiguranje(data.Osiguranje);
+      setNapomena(data.Napomena);
+      setId_vozilo(data.Id_vozilo);
+      setId_korisnik(data.Id_korisnik);
+      setId_zaposlenik(data.Id_zaposlenik);
+    };
 
-    }
-    getOneUgovor()
+    getOneUgovor();
+  }, [id]);
 
-  }, [id])
+  useEffect(() => {
+    const fetchVozila = async () => {
+      try {
+        const response = await axios.get('/api/aplikacija/getAllVozilo');
+        setVozila(response.data);
+      } catch (error) {
+        console.error('Error fetching vozila:', error);
+      }
+    };
+
+    fetchVozila();
+  }, []);
+
+  useEffect(() => {
+    const fetchKorisnici = async () => {
+      try {
+        const response = await axios.get('/api/aplikacija/getAllKorisnik');
+        setKorisnici(response.data);
+      } catch (error) {
+        console.error('Error fetching korisnici:', error);
+      }
+    };
+
+    fetchKorisnici();
+  }, []);
 
   const updateHandler = async (e) => {
-
-    e.preventDefault()
-
+    e.preventDefault();
 
     const data = {
       Datum_pocetka: datum_pocetka,
@@ -52,15 +77,15 @@ const EditUgovor = () => {
       Napomena: napomena,
       Id_vozilo: id_vozilo,
       Id_korisnik: id_korisnik,
-      Id_zaposlenik: id_zaposlenik
-    }
+      Id_zaposlenik: id_zaposlenik,
+    };
 
-    await axios.put(`/api/aplikacija/updateUgovor/${id}`, data)
+    await axios.put(`/api/aplikacija/updateUgovor/${id}`, data);
 
-    toast.success('Ugovor je uspjesno promijenjen!')
-    navigate(`/adminPocetna/${id}`)
+    toast.success('Ugovor je uspješno promijenjen!');
+    navigate(`/adminPocetna/${id}`);
+  };
 
-  }
   return (
     <>
       <HeaderAdmin />
@@ -69,39 +94,8 @@ const EditUgovor = () => {
           <div className="col"></div>
           <div className="col">
             <h1>Izmijeni ugovor</h1>
-            <div class="d-flex">
-              <div class="dropdown me-1">
-                <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
-                  Vozilo
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                  <li><a class="dropdown-item" href="#">Ime i prezime</a></li>
-                  <li><a class="dropdown-item" href="#">Marka i model</a></li>
-                </ul>
-              </div>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Korisnik
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Ime i prezime</a></li>
-                  <li><a class="dropdown-item" href="#">OIB</a></li>
-                </ul>
-              </div>
-              <div class="btn-group">
-                <button type="button" class="btn btn-secondary">Zaposlenik</button>
-                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-                  <span class="visually-hidden">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                  <li><a class="dropdown-item" href="#">Ime i prezime</a></li>
-                </ul>
-              </div>
-            </div>
-
           </div>
-          <div className="col">
-          </div>
+          <div className="col"></div>
         </div>
         <div className="row">
           <div className="col-4">
@@ -117,74 +111,112 @@ const EditUgovor = () => {
               </NavLink>
               <br />
               <br />
-
-
             </nav>
           </div>
           <div className="col-8">
             <Container className='mt-2 p-3'>
-              <Form>Datum početka</Form>
-              <Form onSubmit={updateHandler}>
-                <Form.Group className="mb-3" controlId="title">
+              <Form>
+                <Form.Group className="mb-3" controlId="datum_pocetka">
+                  <Form.Label>Datum početka</Form.Label>
                   <Form.Control
+                    type="date"
                     value={datum_pocetka}
                     onChange={(e) => setDatum_pocetka(e.target.value)}
-                    type="text"
                   />
                 </Form.Group>
 
-                <Form>Datum završetka</Form>
-                <Form.Group className="mb-3" controlId="title">
+                <Form.Group className="mb-3" controlId="datum_zavrsetka">
+                  <Form.Label>Datum završetka</Form.Label>
                   <Form.Control
+                    type="date"
                     value={datum_zavrsetka}
                     onChange={(e) => setDatum_zavrsetka(e.target.value)}
-                    type="text"
                   />
                 </Form.Group>
 
-                <Form>Status</Form>
-                <Form.Group className="demo-radio-buttons-group-label" controlId="datum zavrsetka">
-                  <input type="radio" checked={status === 'U tijeku'} onChange={e => setStatus(e.target.value)} name="status" value="U tijeku" className="app-check"></input>
-                  <label>U tijeku</label>
-                  <br />
-                  <br />
-                  <input type="radio" checked={status === 'Zavrsen'} onChange={e => setStatus(e.target.value)} name="status" value="Zavrsen" className="app-check"></input>
-                  <label>Završen</label>
-                  <br />
-                  <br />
+                <Form.Group className="mb-3" controlId="status">
+                  <Form.Label>Status</Form.Label><br />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="U tijeku"
+                    name="status"
+                    checked={status === 'U tijeku'}
+                    onChange={() => setStatus('U tijeku')}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label="Završen"
+                    name="status"
+                    checked={status === 'Završen'}
+                    onChange={() => setStatus('Završen')}
+                  />
                 </Form.Group>
 
-                <Form>Osiguranje</Form>
-                <Form.Group className="mb-3" controlId="title">
+                <Form.Group className="mb-3" controlId="osiguranje">
+                  <Form.Label>Osiguranje</Form.Label>
                   <Form.Control
+                    type="text"
                     value={osiguranje}
                     onChange={(e) => setOsiguranje(e.target.value)}
-                    type="text"
                   />
                 </Form.Group>
 
-                <Form>Napomena</Form>
-                <Form.Group className="mb-3" controlId="title">
+                <Form.Group className="mb-3" controlId="napomena">
+                  <Form.Label>Napomena</Form.Label>
                   <Form.Control
+                    type="text"
                     value={napomena}
                     onChange={(e) => setNapomena(e.target.value)}
-                    type="text"
                   />
                 </Form.Group>
+
+                <Form.Group className="mb-3" controlId="id_vozilo">
+                  <Form.Label>Vozilo</Form.Label>
+                  <Form.Select
+                    value={id_vozilo}
+                    onChange={(e) => setId_vozilo(e.target.value)}
+                  >
+                    <option>Odaberi vozilo...</option>
+                    {vozila.map((vozilo) => (
+                      <option key={vozilo.id} value={vozilo.id}>
+                        {vozilo.Marka} - {vozilo.Model}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="id_korisnik">
+                  <Form.Label>Korisnik</Form.Label>
+                  <Form.Select
+                    value={id_korisnik}
+                    onChange={(e) => setId_korisnik(e.target.value)}
+                  >
+                    <option>Odaberi korisnika...</option>
+                    {korisnici.map((korisnik) => (
+                      <option key={korisnik.id} value={korisnik.id}>
+                        {korisnik.Ime} {korisnik.Prezime}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+
                 <div className="d-grid gap-2 col-6 mx-auto">
-                  <button type="submit" className="btn btn-outline-dark ms-2" id="button-test">Spremi podatke</button>
-                  <Link to={`/adminpocetna/${id}`} className="btn btn-outline-dark ms-2">Vrati se na početnu</Link>
-
+                  <button type="submit" className="btn btn-outline-dark ms-2">
+                    Spremi podatke
+                  </button>
+                  <Link to={`/adminpocetna/${id}`} className="btn btn-outline-dark ms-2">
+                    Vrati se na početnu
+                  </Link>
                 </div>
-
               </Form>
             </Container>
           </div>
         </div>
-        <div />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default EditUgovor
+export default EditUgovor;
