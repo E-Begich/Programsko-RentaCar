@@ -37,9 +37,7 @@ const AdminPocetna = () => {
                         <h1>Popis automobila</h1>
                     </div>
                     <div className="col">
-                        <NavLink className="nav-link">
-                            <Link to={`/addvozilo`} className="btn btn-outline-dark btn-lg">Dodaj novo vozilo</Link>
-                        </NavLink>
+                        
                     </div>
                 </div>
                 <div className="row">
@@ -49,8 +47,14 @@ const AdminPocetna = () => {
                                 <Link to={`/showzahtjeva`} className="btn btn-outline-dark btn-lg">Pregled zahtjeva</Link>
                             </NavLink>
                             <NavLink className="nav-link">
+                            <Link to={`/addvozilo`} className="btn btn-outline-dark btn-lg">Dodaj novo vozilo</Link>
+                        </NavLink>
+                            <NavLink className="nav-link">
                                 <Link to={`/showVozilo/`} className="btn btn-outline-dark btn-lg">Pregled vozila</Link>
                             </NavLink>
+                            <NavLink className="nav-link">
+                            <Link to={`/showkorisnik`} className="btn btn-outline-dark btn-lg">Pregled klijenta</Link>
+                        </NavLink>
                             <NavLink className="nav-link">
                                 <Link to={`/addkorisnik`} className="btn btn-outline-dark btn-lg">Dodaj novog klijenta</Link>
                             </NavLink>

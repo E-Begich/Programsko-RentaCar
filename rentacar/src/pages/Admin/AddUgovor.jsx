@@ -55,6 +55,7 @@ const AddUgovor = () => {
             return;
         }
 
+        //ISO 8601 međunarodni standard za prikazivanje datuma i vremena - metoda objekta Date koja konvertira datum i vrijeme u ISO 8601 format kao string
         const data = {
             Datum_pocetka: new Date(datum_pocetka).toISOString(),
             Datum_zavrsetka: new Date(datum_zavrsetka).toISOString(),

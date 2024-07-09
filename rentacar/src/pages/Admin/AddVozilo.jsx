@@ -74,7 +74,7 @@ const AddVozilo = () => {
                         <Form.Control
                             value={godina}
                             onChange={(e) => setGodina(e.target.value)}
-                            type="number" />
+                            type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="radni obujam">
@@ -82,7 +82,7 @@ const AddVozilo = () => {
                         <Form.Control
                             value={radni_obujam}
                             onChange={(e) => setRadni_obujam(e.target.value)}
-                            type="number" />
+                            type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="vrsta motora">
@@ -98,7 +98,7 @@ const AddVozilo = () => {
                         <Form.Control
                             value={kilometri}
                             onChange={(e) => setKilometri(e.target.value)}
-                            type="number" />
+                            type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="broj sjedala">
@@ -106,7 +106,7 @@ const AddVozilo = () => {
                         <Form.Control
                             value={broj_sjedala}
                             onChange={(e) => setBroj_sjedala(e.target.value)}
-                            type="number" />
+                            type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="cijena dan">
@@ -114,7 +114,7 @@ const AddVozilo = () => {
                         <Form.Control
                             value={cijena_dan}
                             onChange={(e) => setCijena_dan(e.target.value)}
-                            type="number" />
+                            type="text" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="fotografija">

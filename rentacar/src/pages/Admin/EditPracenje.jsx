@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from 'react-router-dom'; // Correct import
+import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Button, Form } from "react-bootstrap";
 import { Link, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import HeaderAdmin from "../../components/HeaderAdmin";
 
 const EditPracenje = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Correct usage
+  const navigate = useNavigate();
 
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');

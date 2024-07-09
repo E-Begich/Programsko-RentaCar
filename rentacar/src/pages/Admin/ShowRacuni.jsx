@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router';
-import { Container, Row, Col, Card, Modal, Button } from "react-bootstrap"; // Added Modal and Button import
+import { Container, Row, Col, Card, Modal, Button } from "react-bootstrap"; 
 import { Link, NavLink } from 'react-router-dom';
 import HeaderAdmin from "../../components/HeaderAdmin";
 
@@ -9,7 +9,7 @@ const ShowRacuni = () => {
   const { id } = useParams()
 
   const [racun, setRacun] = useState([]);
-  const [showModal, setShowModal] = useState(false); // State for modal
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
 
@@ -23,22 +23,17 @@ const ShowRacuni = () => {
   }, []);
 
   const handleShowModal = (id) => {
-    // Logic to handle modal display
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    // Logic to handle modal close
     setShowModal(false);
   };
 
   const obrisiRacun = async () => {
-    // Logic to delete the racun
     try {
       await axios.delete(`/api/aplikacija/deleteRacun/${id}`);
-      setShowModal(false); // Close the modal after deletion
-      // You might want to update the racun state here or refresh the list
-      // Example: setRacun(updatedRacuni);
+      setShowModal(false);
     } catch (error) {
       console.error('Error deleting racun:', error);
     }

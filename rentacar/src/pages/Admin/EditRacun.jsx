@@ -19,12 +19,13 @@ const EditRacun = () => {
     const getOneRacun = async () => {
       try {
         const { data } = await axios.get(`/api/aplikacija/getOneRacun/${id}`);
+        
         setCijena(data.Cijena);
         setPorez(data.Porez);
         setUkupnaCijena(data.Ukupna_cijena);
         setIdUgovor(data.Id_ugovor);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error(`Error fetching racun with ID ${id}:`, error);
       }
     };
     getOneRacun();
@@ -42,7 +43,7 @@ const EditRacun = () => {
     try {
       await axios.put(`/api/aplikacija/updateRacun/${id}`, data);
       toast.success('Račun je uspješno izmijenjen!');
-      navigate(`/adminPocetna/${id}`);
+      navigate(`/adminpocetna/${id}`);
     } catch (error) {
       console.error('Error updating data:', error);
       toast.error('Dogodila se greška pri izmjeni računa.');
@@ -84,7 +85,7 @@ const EditRacun = () => {
                   <Form.Control
                     value={cijena}
                     onChange={(e) => setCijena(e.target.value)}
-                    type="number"
+                    type="text"
                   />
                 </Form.Group>
 
@@ -93,7 +94,7 @@ const EditRacun = () => {
                   <Form.Control
                     value={porez}
                     onChange={(e) => setPorez(e.target.value)}
-                    type="number"
+                    type="text"
                   />
                 </Form.Group>
 
@@ -102,7 +103,7 @@ const EditRacun = () => {
                   <Form.Control
                     value={ukupnaCijena}
                     onChange={(e) => setUkupnaCijena(e.target.value)}
-                    type="number"
+                    type="text"
                   />
                 </Form.Group>
 

@@ -45,8 +45,9 @@ const ShowVozilo = () => {
               <NavLink className="nav-link">
                 <Link to={`/getAllPracenje/`} className="btn btn-outline-dark btn-lg">Popis praćenja automobila</Link>
               </NavLink>
+              
+              <Link to={`/addVozilo`} className="btn btn-outline-dark btn-lg btn-block mb-2">Dodaj novo vozilo</Link>
               <Link to={`/adminpocetna/${id}`} className="btn btn-outline-dark btn-lg btn-block mb-2">Vrati se na početnu</Link>
-              <Link to={`/addVozilo`} className="btn btn-outline-dark btn-lg btn-block">Dodaj novo vozilo</Link>
               <br />
               <br />
             </nav>
